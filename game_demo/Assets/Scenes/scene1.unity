@@ -414,7 +414,7 @@ MonoBehaviour:
   fallingObstaclePrefab: {fileID: 1182036772615724, guid: 37349010944d346c9875b062fbeea34d,
     type: 2}
   linePrefab: {fileID: 1155370128927698, guid: 4409b9be2d474e44281b66c4a7465596, type: 2}
-  outPrefab: {fileID: 0}
+  outPrefab: {fileID: 1155370128927698, guid: f0fa130b2ff1d70428410a9a34eb0f32, type: 2}
   spawnDelayMinMax: {x: 1, y: 1.5}
 --- !u!4 &1272725005
 Transform:

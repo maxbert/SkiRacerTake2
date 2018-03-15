@@ -12,7 +12,7 @@ public class Avalanche : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.localScale += new Vector3(0,0.0025F,0);
+		transform.localScale += new Vector3(0,0.025F,0);
 //		transform.Translate (0, -0.004F, 0);
 
 		if(Input.GetKey("up")) {
