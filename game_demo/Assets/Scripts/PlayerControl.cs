@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour {
     public int left;
     float prevSpace;
     int counter;
-    
+	public event System.Action OnGameOver;
 
     void Start () {
         score = 0;
@@ -21,14 +21,12 @@ public class PlayerControl : MonoBehaviour {
         left = -1;
 		float halfPlayerWidth = transform.localScale.x / 2f;
 		screenHalfWidth = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerWidth;
-        Points.text = score.ToString();
 	}
 
-    int getScore()
-    {
-        return score;
+    public int getScore(){
+		return score;
     }
-	// Update is called once per frame
+
 	void Update () {
         speed = 7 * Difficulty.GetDifficultyPercent() + 3; 
 		float space = Input.GetAxisRaw ("Jump");
@@ -54,10 +52,18 @@ public class PlayerControl : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D triggerCollider)
     {
  
-
         if (triggerCollider.tag == "Avalanche")
         {
-            Destroy(gameObject);
+			if (OnGameOver != null) {
+				OnGameOver ();
+			}
+//			Destroy(gameObject);
+
+			//			if (speed <= 2) {
+			//				speed += 0;
+			//			} else {
+			//				speed--;	
+			//			}
         }
 
         if (triggerCollider.tag == "Finish")
@@ -67,8 +73,8 @@ public class PlayerControl : MonoBehaviour {
             if (counter > 2)
             {
                 score = score + counter;
-                //FallingObstacles.Start ();
             }
+
             Points.text = score.ToString();
         }
         if(triggerCollider.tag == "Out")
