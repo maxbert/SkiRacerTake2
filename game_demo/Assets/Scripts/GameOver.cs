@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
-	PlayerControl player;
 	public GameObject gameOverScreen;
 	public Text pointsScoredUI;
 	bool gameOver;
@@ -18,7 +17,7 @@ public class GameOver : MonoBehaviour {
 
 	void Update () {
 		if (gameOver) {
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Input.GetKeyDown (KeyCode.R)) {
 				SceneManager.LoadScene (0);
 			}
 		}

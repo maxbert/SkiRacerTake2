@@ -53,10 +53,13 @@ public class PlayerControl : MonoBehaviour {
     {
  
         if (triggerCollider.tag == "Avalanche")
-        {
+        {	
+			print ("Avalanche touched");
+
 			if (OnGameOver != null) {
 				OnGameOver ();
 			}
+
 //			Destroy(gameObject);
 
 			//			if (speed <= 2) {
@@ -75,7 +78,7 @@ public class PlayerControl : MonoBehaviour {
                 score = score + counter;
             }
 
-            Points.text = score.ToString();
+             Points.text = score.ToString();
         }
         if(triggerCollider.tag == "Out")
         {

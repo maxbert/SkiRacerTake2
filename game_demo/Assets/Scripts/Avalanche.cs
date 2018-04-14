@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Avalanche : MonoBehaviour {
 
-	// Use this for initialization
+
+
 	void Start () {
 		transform.localPosition = new Vector2 (0, Camera.main.orthographicSize);
 		transform.localScale = new Vector2 (Camera.main.aspect * Camera.main.orthographicSize * 2, 0);
@@ -22,7 +23,7 @@ public class Avalanche : MonoBehaviour {
 				transform.localScale -= new Vector3 (0, 0.01F, 0);
 			}
 		}
-
+			
 	}
 
 }
