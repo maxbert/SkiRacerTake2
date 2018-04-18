@@ -1,14 +1,17 @@
-﻿using System.Collections;
+﻿/* learnt from this youtube tutorial : https://www.youtube.com/watch?v=1EJOYWBcrzQ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class changeSlalom : MonoBehaviour {
+public class ChangeSlalom : MonoBehaviour {
 
 	public Sprite RedSlalom;
 	public Sprite BlueSlalom;
 
+	//uses same logic as changeSlalom
+
 	float timer = 0.5f;
-	float delay = 0.5f;
+	float delay = 0.5f; // this can be modified depending on how we want it to look
 
 	void Start(){
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = RedSlalom;

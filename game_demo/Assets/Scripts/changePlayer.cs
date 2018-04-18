@@ -1,15 +1,18 @@
-﻿using System.Collections;
+﻿/* learnt from this youtube tutorial : https://www.youtube.com/watch?v=1EJOYWBcrzQ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class changePlayer : MonoBehaviour {
+public class ChangePlayer : MonoBehaviour {
 
 	public Sprite manLeft;
-	public Sprite manRight;
+	public Sprite manRight; //switching in between sprites
 
-	float timer = 3f;
-	float delay = 3f;
+	// be accessed outside of the class so we can modify when the player needs switching
+	public float timer = 3f;
+	public float delay = 3f;
 
+	// initialize the starting sprite to at least one of them
 	void Start(){
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = manLeft;
 	}
