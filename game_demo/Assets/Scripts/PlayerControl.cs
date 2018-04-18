@@ -69,12 +69,13 @@ public class PlayerControl : MonoBehaviour {
                 score = score + counter;
                 //FallingObstacles.Start ();
             }
-            Points.text = score.ToString();
+            //Points.text = score.ToString();
+			Points.text = "Score : " + score.ToString();
         }
         if(triggerCollider.tag == "Out")
         {
             counter = 0;
-            Points.text = score.ToString();
+            Points.text = "Score : " + score.ToString();
         }
     }
 		 
