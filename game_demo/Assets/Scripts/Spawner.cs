@@ -45,11 +45,9 @@ public class Spawner : MonoBehaviour {
 			//generate random number for trees
 
 			Random rnd = new Random();
-			int rand1 = Random.Range(1, 4);
-			int rand2 = Random.Range(5, 7);
-			int rand3 = Random.Range(8, 12);
-			int rand4 = Random.Range(3, 9);
-			int rand5 = Random.Range(2, 5);
+			int rand1 = Random.Range(1, 10);
+            int randX = Random.Range((int)(-2 * (screenHalfSize.x)), (int)(2 * (screenHalfSize.x)));
+		
 
             lastSlalomX = slalomx;
             float slalomy = -screenHalfSize.y - 15;
@@ -59,34 +57,16 @@ public class Spawner : MonoBehaviour {
             Vector2 spawnPositionLineLeft = new Vector2(-(screenHalfSize.x - slalomx) / 2.0F, slalomy);
             Vector2 spawnPositionLineRight = new Vector2((screenHalfSize.x - (slalomx + 5))/2.0F, slalomy);
 
+            if (rand1 > 2)
+            {
+                Vector2 treeSpawn1 = new Vector2(randX, -1 * screenHalfSize.y);
+                GameObject randomTree1 = (GameObject)Instantiate(treePrefab, treeSpawn1, Quaternion.identity);
+                randomTree1.transform.localScale = Vector2.one * spawnSize;
 
-			Vector2 treeSpawn1 = new Vector2(slalomx - rand1, slalomy);
-			Vector2 treeSpawn2 = new Vector2(slalomx + rand2, rand2 - 3);
-			Vector2 treeSpawn3 = new Vector2(slalomx + rand3, rand3 + 2);
-			Vector2 treeSpawn4 = new Vector2(slalomx - rand3 + rand4, rand3 - 3);
-			Vector2 treeSpawn5 = new Vector2(slalomx + rand5, rand3 - 3);
-
-			Vector2 treeSpawn6 = new Vector2(slalomx - rand1, rand4);
-			Vector2 treeSpawn7 = new Vector2(rand5, rand3 - 5);
-			Vector2 treeSpawn8 = new Vector2(rand4 + rand5, slalomy);
-			Vector2 treeSpawn9 = new Vector2(rand1 + rand2 + rand3, rand3 - slalomx);
-			Vector2 treeSpawn10 = new Vector2(rand5 + slalomx, rand1 - slalomy);
-
+            }
 
             GameObject slalomPostLeft = (GameObject)Instantiate(fallingObstaclePrefab, spawnPosition, Quaternion.identity);
             GameObject slalomPostRight = (GameObject)Instantiate(fallingObstaclePrefab, spawnPosition2, Quaternion.identity);
-
-			GameObject randomTree1 = (GameObject)Instantiate(treePrefab, treeSpawn1, Quaternion.identity);
-			GameObject randomTree2 = (GameObject)Instantiate(treePrefab, treeSpawn2, Quaternion.identity);
-			GameObject randomTree3 = (GameObject)Instantiate(treePrefab, treeSpawn3, Quaternion.identity);
-			GameObject randomTree4 = (GameObject)Instantiate(treePrefab, treeSpawn4, Quaternion.identity);
-			GameObject randomTree5 = (GameObject)Instantiate(treePrefab, treeSpawn5, Quaternion.identity);
-
-			GameObject randomTree6 = (GameObject)Instantiate(treePrefab, treeSpawn6, Quaternion.identity);
-			GameObject randomTree7 = (GameObject)Instantiate(treePrefab, treeSpawn7, Quaternion.identity);
-			GameObject randomTree8 = (GameObject)Instantiate(treePrefab, treeSpawn8, Quaternion.identity);
-			GameObject randomTree9 = (GameObject)Instantiate(treePrefab, treeSpawn9, Quaternion.identity);
-			GameObject randomTree10 = (GameObject)Instantiate(treePrefab, treeSpawn10, Quaternion.identity);
             
 			GameObject pointLine = (GameObject)Instantiate(linePrefab, spawnPositionLine, Quaternion.identity);
 			GameObject pointLineLeft = (GameObject)Instantiate(outPrefab, spawnPositionLineLeft, Quaternion.identity);
@@ -98,19 +78,6 @@ public class Spawner : MonoBehaviour {
 
             slalomPostLeft.transform.localScale = Vector2.one * spawnSize;
             slalomPostRight.transform.localScale = Vector2.one * spawnSize;
-
-
-			randomTree1.transform.localScale = Vector2.one * spawnSize;
-			randomTree2.transform.localScale = Vector2.one * spawnSize;
-			randomTree3.transform.localScale = Vector2.one * spawnSize;
-			randomTree4.transform.localScale = Vector2.one * spawnSize;
-			randomTree5.transform.localScale = Vector2.one * spawnSize;
-
-			randomTree6.transform.localScale = Vector2.one * spawnSize;
-			randomTree7.transform.localScale = Vector2.one * spawnSize;
-			randomTree8.transform.localScale = Vector2.one * spawnSize;
-			randomTree9.transform.localScale = Vector2.one * spawnSize;
-			randomTree10.transform.localScale = Vector2.one * spawnSize;
         }
 	}
 		

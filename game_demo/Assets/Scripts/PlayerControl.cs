@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public float speed = 7;
 	float screenHalfWidth;
     public Text Points;
+    private SpriteRenderer spriteR;
     private int score;
     public int left;
     float prevSpace;
@@ -21,6 +22,7 @@ public class PlayerControl : MonoBehaviour {
         left = -1;
 		float halfPlayerWidth = transform.localScale.x / 2f;
 		screenHalfWidth = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerWidth;
+        spriteR = gameObject.GetComponent<SpriteRenderer>();
         Points.text = score.ToString();
 	}
 
@@ -38,6 +40,14 @@ public class PlayerControl : MonoBehaviour {
            
         }
         prevSpace = space;
+        if(left > 0)
+        {
+            spriteR.flipX = true;
+        }
+        else
+        {
+            spriteR.flipX = false;
+        }
         float velocity = left * speed;
 		transform.Translate (Vector2.right * velocity * Time.deltaTime);
 
