@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +11,14 @@ public class PlayerControl : MonoBehaviour {
     private int score;
     public int left;
     float prevSpace;
-    int counter;
-    
+    public int counter;
+    public event System.Action OnGameOver;
+    int breathsPer;
+    int breaths;
 
     void Start () {
         score = 0;
-        counter = 0;
+        counter = 2;
         left = -1;
 		float halfPlayerWidth = transform.localScale.x / 2f;
 		screenHalfWidth = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerWidth;
@@ -32,7 +32,16 @@ public class PlayerControl : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        speed = 7 * Difficulty.GetDifficultyPercent() + 3; 
+
+        if (breaths > breathsPer)
+        {
+            if (OnGameOver != null)
+            {
+                OnGameOver();
+            }
+        }
+
+        speed = 7 * Difficulty.GetDifficultyPercent(this.counter) + 3; 
 		float space = Input.GetAxisRaw ("Jump");
         if(space != prevSpace && space != 0)
         {
@@ -67,25 +76,32 @@ public class PlayerControl : MonoBehaviour {
 
         if (triggerCollider.tag == "Avalanche")
         {
-            Destroy(gameObject);
+            counter = 0;
         }
+
+        if (triggerCollider.tag == "Tree")
+        {
+            counter = 0;
+            
+        }
+
 
         if (triggerCollider.tag == "Finish")
         {
             score += 1;
             counter = counter + 1;
-            if (counter > 2)
+            if (counter > 4)
             {
-                score = score + counter;
+                score = score + counter - 2;
                 //FallingObstacles.Start ();
             }
             //Points.text = score.ToString();
-			Points.text = "Score : " + score.ToString();
+			Points.text =  score.ToString();
         }
-        if(triggerCollider.tag == "Out")
+        else if(triggerCollider.tag == "Out")
         {
-            counter = 0;
-            Points.text = "Score : " + score.ToString();
+            counter = 2;
+            Points.text =  score.ToString();
         }
     }
 		 
