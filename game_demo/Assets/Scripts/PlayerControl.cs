@@ -77,32 +77,39 @@ public class PlayerControl : MonoBehaviour {
         if (triggerCollider.tag == "Avalanche")
         {
             counter = 0;
+            Points.color = new Color(0, 0, 0);
         }
 
         if (triggerCollider.tag == "Tree")
         {
             counter = 0;
-            
+            Points.color = new Color(0, 0, 0);
+
         }
 
 
-        if (triggerCollider.tag == "Finish")
+        if(triggerCollider.tag == "Finish")
         {
             score += 1;
             counter = counter + 1;
             if (counter > 4)
             {
                 score = score + counter - 2;
+                Points.color = new Color(1f, .17f, 0.0f);
+
                 //FallingObstacles.Start ();
             }
             //Points.text = score.ToString();
-			Points.text =  score.ToString();
+            Points.text = score.ToString();
         }
-        else if(triggerCollider.tag == "Out")
+        else if (triggerCollider.tag == "Out")
         {
             counter = 2;
-            Points.text =  score.ToString();
+            Points.color = new Color(0, 0, 0);
+
+            Points.text = score.ToString();
         }
     }
-		 
 }
+		 
+
