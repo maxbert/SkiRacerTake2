@@ -35,4 +35,8 @@ public class GameOver : MonoBehaviour
         pointsScoredUI.text = player.Points.text;
         gameOver = true;
     }
+
+	public void Restart(){
+		SceneManager.LoadScene (0);
+	}
 }
