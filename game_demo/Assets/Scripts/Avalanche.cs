@@ -29,7 +29,7 @@ public class Avalanche : MonoBehaviour
         {
 
             pressure = FizzyoFramework.Instance.Device.Pressure();
-            transform.Translate(Vector2.up * 1 * pressure * Time.deltaTime);
+            transform.Translate(Vector2.up * 1.5f * pressure * Time.deltaTime);
             
         }
 

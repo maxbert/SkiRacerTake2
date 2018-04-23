@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +42,7 @@ public class CalibrateScene : MonoBehaviour {
             if (!waitForEndOfBreath && exhaleTime >= minExhaleTime && breathCount+1 >= requiredBreaths)
             {
                 Calibrate();
-                NextScene();
+                SceneManager.LoadScene(1);
             }
         }
 
@@ -71,7 +71,7 @@ public class CalibrateScene : MonoBehaviour {
         if (waitForEndOfBreath && breathCount  >= requiredBreaths)
         {
             Calibrate();
-            NextScene();
+            SceneManager.LoadScene(1);
         }
     }
 
@@ -100,7 +100,7 @@ public class CalibrateScene : MonoBehaviour {
 
     void NextScene()
     {
-        SceneManager.LoadScene(FizzyoFramework.Instance.CallbackScenePath);
+        SceneManager.LoadScene(1);
     }
 
 

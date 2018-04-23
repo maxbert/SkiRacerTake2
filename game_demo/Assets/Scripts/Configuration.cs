@@ -11,7 +11,7 @@ public class Configuration : MonoBehaviour {
 
 	public void playGame(){
         BreathsCount.BreathsPer = counter;
-        SceneManager.LoadScene (1);
+        SceneManager.LoadScene (2);
 	}
 
 	public void quitGame(){

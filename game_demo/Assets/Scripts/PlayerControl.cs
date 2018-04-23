@@ -64,6 +64,7 @@ public class PlayerControl : MonoBehaviour {
         if(isConfig){
             left = 0;
         }
+      
 
         if (breathsPer < breaths)
         {
@@ -103,20 +104,35 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 
+
+    private void OnTriggerStay2D(Collider2D triggerCollider)
+    {
+        if (triggerCollider.tag == "Avalanche")
+        {
+            counter = 0;
+            left = 0;
+            Points.color = new Color(0, 0, 0);
+            print("inAvalanche");
+        }
+      
+    }
+
+
+    private void OnTriggerExit2D(Collider2D triggerCollider)
+    {
+        if( triggerCollider.tag == "Avalanche")
+        {
+            left = 1;
+            print("outOfAvalanche");
+
+        }
+
+    }
     void OnTriggerEnter2D(Collider2D triggerCollider)
     {
  
 
-        if (triggerCollider.tag == "Avalanche")
-        {
-            counter = 0;
-            isConfig = true;
-            Points.color = new Color(0, 0, 0);
-        }
-        else
-        {
-            isConfig = false;
-        }
+       
 
         
 
@@ -127,10 +143,10 @@ public class PlayerControl : MonoBehaviour {
             counter = counter + 1;
             if (counter > 4)
             {
-                Vector2 spawnPosition = new Vector2(this.transform.position.x, this.transform.position.y);
+                Vector2 spawnPosition = new Vector2(this.transform.position.x + 1, this.transform.position.y - 1);
                 GameObject streakTextBox = (GameObject)Instantiate(StreakText, spawnPosition, Quaternion.identity);
                 TextMesh theText = streakTextBox.transform.GetComponent<TextMesh>();
-                theText.text = counter.ToString();
+                theText.text = "+" + (counter-2).ToString();
                 score = score + counter - 2;
                 Points.color = new Color(1f, .17f, 0.0f);
                 //FallingObstacles.Start ();
@@ -151,7 +167,7 @@ public class PlayerControl : MonoBehaviour {
         if (collision.gameObject.tag == "Tree")
         {
             counter = 0;
-            Vector2 spawnPosition = new Vector2(this.transform.position.x, this.transform.position.y);
+            Vector2 spawnPosition = new Vector2(this.transform.position.x + 1, this.transform.position.y + 1);
             GameObject streakTextBox = (GameObject)Instantiate(StreakText, spawnPosition, Quaternion.identity);
             TextMesh theText = streakTextBox.transform.GetComponent<TextMesh>();
             theText.text = "ouch";
