@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour {
     void Start () {
 		screenHalfSize = new Vector2 (Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         lastSlalomX = 1;
-        spawnSize = 0.7f;
+        spawnSize = 0.3f;
     }
 
     void Update() {
@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour {
             {
                 Vector2 treeSpawn1 = new Vector2(randX, -1 * screenHalfSize.y - 5);
                 GameObject randomTree1 = (GameObject)Instantiate(treePrefab, treeSpawn1, Quaternion.identity);
-                randomTree1.transform.localScale = Vector2.one * spawnSize;
+                randomTree1.transform.localScale = Vector2.one * spawnSize * 1.5f;
 
             }
         }
@@ -71,8 +71,8 @@ public class Spawner : MonoBehaviour {
             Vector2 spawnPosition = new Vector2(slalomx, slalomy);
             Vector2 spawnPosition2 = new Vector2(slalomx + 5, slalomy);
             Vector2 spawnPositionLine = new Vector2(slalomx + (5 / 2) + 0.7f, slalomy);
-            Vector2 spawnPositionLineLeft = new Vector2(-(screenHalfSize.x - slalomx) / 2.0F - 2, slalomy - spawnSize);
-            Vector2 spawnPositionLineRight = new Vector2((slalomx + 5) + ((screenHalfSize.x - (slalomx + 5)) / 2) + 2, slalomy - spawnSize);
+            Vector2 spawnPositionLineLeft = new Vector2(-(screenHalfSize.x - slalomx) / 2.0F - 1, slalomy - spawnSize);
+            Vector2 spawnPositionLineRight = new Vector2((slalomx + 5) + ((screenHalfSize.x - (slalomx + 5)) / 2) + 1, slalomy - spawnSize);
 
           
 

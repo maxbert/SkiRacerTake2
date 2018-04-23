@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Fizzyo;
 
 
 public class PlayerControl : MonoBehaviour {
@@ -10,14 +11,21 @@ public class PlayerControl : MonoBehaviour {
     private SpriteRenderer spriteR;
     private int score;
     public int left;
-    float prevSpace;
+    bool prevSpace;
     public int counter;
     public event System.Action OnGameOver;
     int breathsPer;
     int breaths;
+    public Sprite leftGuy;
+    public Sprite rightGuy;
+    public bool isConfig;
 
     void Start () {
         score = 0;
+        breaths = 0;
+        breathsPer = BreathsCount.BreathsPer;
+        FizzyoFramework.Instance.Recogniser.BreathStarted += OnBreathStarted;
+        FizzyoFramework.Instance.Recogniser.BreathComplete += OnBreathEnded;
         counter = 2;
         left = -1;
 		float halfPlayerWidth = transform.localScale.x / 2f;
@@ -30,20 +38,42 @@ public class PlayerControl : MonoBehaviour {
     {
         return score;
     }
-	// Update is called once per frame
-	void Update () {
 
-        if (breaths > breathsPer)
+
+    void OnBreathStarted(object sender)
+    {
+        Debug.Log("Breath started");
+    }
+
+    void OnBreathEnded(object sender, ExhalationCompleteEventArgs e)
+    {
+        breaths++;
+        
+    }
+
+    public void SetBreathsPer(int breathes)
+    {
+        this.breathsPer = breathes;
+    }
+    // Update is called once per frame
+    void Update () {
+        print(breathsPer);
+        if(isConfig){
+            left = 0;
+        }
+
+        if (breathsPer < breaths)
         {
+        
             if (OnGameOver != null)
             {
                 OnGameOver();
             }
         }
 
-        speed = 7 * Difficulty.GetDifficultyPercent(this.counter) + 3; 
-		float space = Input.GetAxisRaw ("Jump");
-        if(space != prevSpace && space != 0)
+        speed = 7 * Difficulty.GetDifficultyPercent(this.counter) + 3;
+        bool space = FizzyoFramework.Instance.Device.ButtonDown();
+        if (space != prevSpace && space != false)
         {
             left = left * -1;
            
@@ -51,11 +81,11 @@ public class PlayerControl : MonoBehaviour {
         prevSpace = space;
         if(left > 0)
         {
-            spriteR.flipX = true;
+            spriteR.sprite = leftGuy;
         }
         else
         {
-            spriteR.flipX = false;
+            spriteR.sprite = rightGuy;
         }
         float velocity = left * speed;
 		transform.Translate (Vector2.right * velocity * Time.deltaTime);
@@ -77,15 +107,15 @@ public class PlayerControl : MonoBehaviour {
         if (triggerCollider.tag == "Avalanche")
         {
             counter = 0;
+            isConfig = true;
             Points.color = new Color(0, 0, 0);
         }
-
-        if (triggerCollider.tag == "Tree")
+        else
         {
-            counter = 0;
-            Points.color = new Color(0, 0, 0);
-
+            isConfig = false;
         }
+
+        
 
 
         if(triggerCollider.tag == "Finish")
@@ -94,9 +124,9 @@ public class PlayerControl : MonoBehaviour {
             counter = counter + 1;
             if (counter > 4)
             {
+
                 score = score + counter - 2;
                 Points.color = new Color(1f, .17f, 0.0f);
-
                 //FallingObstacles.Start ();
             }
             //Points.text = score.ToString();
@@ -106,8 +136,17 @@ public class PlayerControl : MonoBehaviour {
         {
             counter = 2;
             Points.color = new Color(0, 0, 0);
-
             Points.text = score.ToString();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Tree")
+        {
+            counter = 0;
+            Points.color = new Color(0, 0, 0);
+
         }
     }
 }

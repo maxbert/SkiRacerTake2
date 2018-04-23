@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fizzyo;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,7 @@ public class GameOver : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
+                FizzyoFramework.Instance.Achievements.PostScore(int.Parse(player.Points.text));
                 SceneManager.LoadScene(0);
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Difficulty{
 
-	static float secondsToMax = 8;
+	static float secondsToMax = 15;
 
 	public static float GetDifficultyPercent(int counter){
 

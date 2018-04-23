@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +10,8 @@ public class Configuration : MonoBehaviour {
 	public Text Breaths;
 
 	public void playGame(){
-		SceneManager.LoadScene (1);
+        BreathsCount.BreathsPer = counter;
+        SceneManager.LoadScene (1);
 	}
 
 	public void quitGame(){
@@ -36,9 +37,7 @@ public class Configuration : MonoBehaviour {
 
 	public void increaseBreaths(){
 		
-		if (counter == 10) {
-			counter = 10;
-		} else {
+		if (counter < 100) {
 			counter++;
 		}
 			
