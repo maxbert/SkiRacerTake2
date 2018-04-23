@@ -1210,6 +1210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  StreakText: {fileID: 1008677494858484, guid: b936e44069a557f48b20d01deed08537, type: 2}
+  OuchText: {fileID: 1865060657668800, guid: 9616e9b0857bba84b9adc61647735615, type: 2}
   Points: {fileID: 237361855}
   left: 0
   counter: 0

@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Fizzyo;
+using TMPro;
 
 
 public class PlayerControl : MonoBehaviour {
 
 	public float speed = 7;
 	float screenHalfWidth;
+    public GameObject StreakText;
+    public GameObject OuchText;
     public Text Points;
     private SpriteRenderer spriteR;
     private int score;
@@ -124,7 +127,10 @@ public class PlayerControl : MonoBehaviour {
             counter = counter + 1;
             if (counter > 4)
             {
-
+                Vector2 spawnPosition = new Vector2(this.transform.position.x, this.transform.position.y);
+                GameObject streakTextBox = (GameObject)Instantiate(StreakText, spawnPosition, Quaternion.identity);
+                TextMesh theText = streakTextBox.transform.GetComponent<TextMesh>();
+                theText.text = counter.ToString();
                 score = score + counter - 2;
                 Points.color = new Color(1f, .17f, 0.0f);
                 //FallingObstacles.Start ();
@@ -145,6 +151,10 @@ public class PlayerControl : MonoBehaviour {
         if (collision.gameObject.tag == "Tree")
         {
             counter = 0;
+            Vector2 spawnPosition = new Vector2(this.transform.position.x, this.transform.position.y);
+            GameObject streakTextBox = (GameObject)Instantiate(StreakText, spawnPosition, Quaternion.identity);
+            TextMesh theText = streakTextBox.transform.GetComponent<TextMesh>();
+            theText.text = "ouch";
             Points.color = new Color(0, 0, 0);
 
         }
