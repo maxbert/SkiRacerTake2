@@ -35,6 +35,7 @@ public class PlayerControl : MonoBehaviour {
 		screenHalfWidth = Camera.main.aspect * Camera.main.orthographicSize - halfPlayerWidth;
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         Points.text = score.ToString();
+        
 	}
 
     int getScore()
@@ -60,7 +61,6 @@ public class PlayerControl : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        print(breathsPer);
         if(isConfig){
             left = 0;
         }

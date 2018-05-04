@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour
     void Start()
     {
         FindObjectOfType<PlayerControl>().OnGameOver += OnGameOver;
+        gameOver = false;
 
     }
 
@@ -23,11 +24,9 @@ public class GameOver : MonoBehaviour
     {
         if (gameOver)
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                FizzyoFramework.Instance.Achievements.PostScore(int.Parse(player.Points.text));
-                SceneManager.LoadScene(0);
-            }
+            FizzyoFramework.Instance.Achievements.PostScore(int.Parse(player.Points.text));
+
+
         }
     }
 
@@ -39,6 +38,7 @@ public class GameOver : MonoBehaviour
     }
 
 	public void Restart(){
-		SceneManager.LoadScene (0);
+        gameOver = false;
+		SceneManager.LoadScene (1);
 	}
 }
